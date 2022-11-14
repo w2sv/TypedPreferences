@@ -7,10 +7,13 @@ import android.net.Uri
 import androidx.core.content.edit
 import com.w2sv.typedpreferences.TypedPreferences
 
-abstract class UriPreferences<T: Uri?>(defaults: MutableMap<String, T>) : TypedPreferences<T>(defaults) {
+abstract class UriPreferences<T : Uri?>(vararg preferenceDefault: Pair<String, T>) :
+    TypedPreferences<T>(
+        mutableMapOf(*preferenceDefault)
+    ) {
 
     override fun SharedPreferences.writeValue(key: String, value: T, synchronously: Boolean) {
-        edit(synchronously){
+        edit(synchronously) {
             putString(
                 key,
                 value?.toString()

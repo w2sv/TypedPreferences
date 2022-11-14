@@ -6,11 +6,13 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.w2sv.typedpreferences.TypedPreferences
 
-abstract class BooleanPreferences(defaults: MutableMap<String, Boolean>) : TypedPreferences<Boolean>(
-    defaults
-) {
+abstract class BooleanPreferences(vararg preferenceDefault: Pair<String, Boolean>) :
+    TypedPreferences<Boolean>(
+        mutableMapOf(*preferenceDefault)
+    ) {
+
     override fun SharedPreferences.writeValue(key: String, value: Boolean, synchronously: Boolean) {
-        edit(synchronously){
+        edit(synchronously) {
             putBoolean(key, value)
         }
     }
