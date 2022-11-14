@@ -1,11 +1,10 @@
 package com.w2sv.typedpreferences
 
-import android.content.Context
 import android.content.SharedPreferences
 import slimber.log.i
 
 /**
- * Base for KEY to VALUE map delegator objects, the content of which is to be stored in [SharedPreferences]
+ * Base for map delegator objects interfacing with [SharedPreferences]
  */
 abstract class TypedPreferences<T>(protected val defaults: MutableMap<String, T>) : MutableMap<String, T> by defaults {
 
@@ -25,11 +24,11 @@ abstract class TypedPreferences<T>(protected val defaults: MutableMap<String, T>
         lastDiscSyncState = toMutableMap()
     }
 
-    fun writeChangedValues(sharedPreferences: Lazy<SharedPreferences>) =
+    fun writeChangedValues(sharedPreferences: Lazy<SharedPreferences>, synchronously: Boolean = false) =
         entries
             .filter { lastDiscSyncState.getValue(it.key) != it.value }
             .forEach {
-                sharedPreferences.value.writeValue(it.key, it.value)
+                sharedPreferences.value.writeValue(it.key, it.value, synchronously)
                 i { "Wrote ${it.key}=${it.value} to shared preferences" }
 
                 lastDiscSyncState[it.key] = it.value
@@ -44,9 +43,6 @@ abstract class TypedPreferences<T>(protected val defaults: MutableMap<String, T>
     /**
      * Type-specific value fetching from and writing to [SharedPreferences]
      */
-    protected abstract fun SharedPreferences.writeValue(key: String, value: T)
+    protected abstract fun SharedPreferences.writeValue(key: String, value: T, synchronously: Boolean)
     protected abstract fun SharedPreferences.getValue(key: String, defaultValue: T): T
 }
-
-fun Context.applicationPreferences(): SharedPreferences =
-    getSharedPreferences(packageName, Context.MODE_PRIVATE)
