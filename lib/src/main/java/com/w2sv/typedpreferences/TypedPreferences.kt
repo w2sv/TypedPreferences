@@ -24,11 +24,11 @@ abstract class TypedPreferences<T>(protected val defaults: MutableMap<String, T>
         lastDiscSyncState = toMutableMap()
     }
 
-    fun writeChangedValues(sharedPreferences: Lazy<SharedPreferences>, synchronously: Boolean = false) =
+    fun writeChangedValues(sharedPreferences: SharedPreferences, synchronously: Boolean = false) =
         entries
             .filter { lastDiscSyncState.getValue(it.key) != it.value }
             .forEach {
-                sharedPreferences.value.writeValue(it.key, it.value, synchronously)
+                sharedPreferences.writeValue(it.key, it.value, synchronously)
                 i { "Wrote ${it.key}=${it.value} to shared preferences" }
 
                 lastDiscSyncState[it.key] = it.value
