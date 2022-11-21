@@ -1,6 +1,8 @@
 package com.w2sv.typedpreferences
 
 import android.content.SharedPreferences
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import slimber.log.i
 
 /**
@@ -8,8 +10,9 @@ import slimber.log.i
  */
 abstract class TypedPreferences<T>(
     protected val defaults: MutableMap<String, T>,
-    sharedPreferences: SharedPreferences
-) : MutableMap<String, T> by defaults {
+    private val sharedPreferences: SharedPreferences
+) : MutableMap<String, T> by defaults,
+    DefaultLifecycleObserver {
 
     /**
      * Keep track of which values have changed since last call to [writeChangedValues]
@@ -26,7 +29,7 @@ abstract class TypedPreferences<T>(
         i { "Initialized ${javaClass.name}: $this" }
     }
 
-    fun writeChangedValues(sharedPreferences: SharedPreferences, synchronously: Boolean = false) =
+    fun writeChangedValues(synchronously: Boolean = false) =
         entries
             .filter { lastDiscSyncState.getValue(it.key) != it.value }
             .forEach {
@@ -46,4 +49,10 @@ abstract class TypedPreferences<T>(
     )
 
     protected abstract fun SharedPreferences.getValue(key: String, defaultValue: T): T
+
+    override fun onPause(owner: LifecycleOwner) {
+        super.onPause(owner)
+
+        writeChangedValues()
+    }
 }
