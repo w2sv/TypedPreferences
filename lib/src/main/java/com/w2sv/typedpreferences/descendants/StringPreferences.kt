@@ -6,9 +6,10 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.w2sv.typedpreferences.TypedPreferences
 
-abstract class StringPreferences<T : String?>(vararg preferenceDefault: Pair<String, T>) :
+abstract class StringPreferences<T : String?>(vararg preferenceDefault: Pair<String, T>, sharedPreferences: SharedPreferences) :
     TypedPreferences<T>(
-        mutableMapOf(*preferenceDefault)
+        mutableMapOf(*preferenceDefault),
+        sharedPreferences
     ) {
 
     override fun SharedPreferences.writeValue(key: String, value: T, synchronously: Boolean) {
