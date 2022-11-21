@@ -6,7 +6,10 @@ import slimber.log.i
 /**
  * Base for map delegator objects interfacing with [SharedPreferences]
  */
-abstract class TypedPreferences<T>(protected val defaults: MutableMap<String, T>, sharedPreferences: SharedPreferences) : MutableMap<String, T> by defaults {
+abstract class TypedPreferences<T>(
+    protected val defaults: MutableMap<String, T>,
+    sharedPreferences: SharedPreferences
+) : MutableMap<String, T> by defaults {
 
     /**
      * Keep track of which values have changed since last call to [writeChangedValues]
@@ -14,18 +17,13 @@ abstract class TypedPreferences<T>(protected val defaults: MutableMap<String, T>
      */
     private val lastDiscSyncState: MutableMap<String, T>
 
-    /**
-     * Initializes values with the ones contained in [sharedPreferences] instance
-     * and copies them to [lastDiscSyncState]
-     */
-    init{
-        i { "Initializing ${javaClass.name} from SharedPreferences" }
-
+    init {
         forEach { (key, defaultValue) ->
             put(key, sharedPreferences.getValue(key, defaultValue))
-            i { "Set ${javaClass.name}.$key to $defaultValue from SharedPreferences" }
         }
         lastDiscSyncState = toMutableMap()
+
+        i { "Initialized ${javaClass.name}: $this" }
     }
 
     fun writeChangedValues(sharedPreferences: SharedPreferences, synchronously: Boolean = false) =
@@ -41,6 +39,11 @@ abstract class TypedPreferences<T>(protected val defaults: MutableMap<String, T>
     /**
      * Type-specific value fetching from and writing to [SharedPreferences]
      */
-    protected abstract fun SharedPreferences.writeValue(key: String, value: T, synchronously: Boolean)
+    protected abstract fun SharedPreferences.writeValue(
+        key: String,
+        value: T,
+        synchronously: Boolean
+    )
+
     protected abstract fun SharedPreferences.getValue(key: String, defaultValue: T): T
 }
