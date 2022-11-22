@@ -6,7 +6,10 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.w2sv.typedpreferences.TypedPreferences
 
-abstract class BooleanPreferences(vararg preferenceDefault: Pair<String, Boolean>, sharedPreferences: SharedPreferences) :
+abstract class BooleanPreferences(
+    vararg preferenceDefault: Pair<String, Boolean>,
+    sharedPreferences: SharedPreferences
+) :
     TypedPreferences<Boolean>(
         mutableMapOf(*preferenceDefault),
         sharedPreferences

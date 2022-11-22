@@ -7,7 +7,10 @@ import android.net.Uri
 import androidx.core.content.edit
 import com.w2sv.typedpreferences.TypedPreferences
 
-abstract class UriPreferences<T : Uri?>(vararg preferenceDefault: Pair<String, T>, sharedPreferences: SharedPreferences) :
+abstract class UriPreferences<T : Uri?>(
+    vararg preferenceDefault: Pair<String, T>,
+    sharedPreferences: SharedPreferences
+) :
     TypedPreferences<T>(
         mutableMapOf(*preferenceDefault),
         sharedPreferences
