@@ -11,8 +11,8 @@ abstract class LongPreferences(
     sharedPreferences: SharedPreferences
 ) :
     TypedPreferences<Long>(
-        mutableMapOf(*preferenceDefault),
-        sharedPreferences
+        *preferenceDefault,
+        sharedPreferences = sharedPreferences
     ) {
 
     override fun SharedPreferences.writeValue(key: String, value: Long, synchronously: Boolean) {

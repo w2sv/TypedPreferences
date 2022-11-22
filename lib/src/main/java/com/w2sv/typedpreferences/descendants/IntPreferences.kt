@@ -11,8 +11,8 @@ abstract class IntPreferences(
     sharedPreferences: SharedPreferences
 ) :
     TypedPreferences<Int>(
-        mutableMapOf(*preferenceDefault),
-        sharedPreferences
+        *preferenceDefault,
+        sharedPreferences = sharedPreferences
     ) {
 
     override fun SharedPreferences.writeValue(key: String, value: Int, synchronously: Boolean) {

@@ -11,8 +11,8 @@ abstract class FloatPreferences(
     sharedPreferences: SharedPreferences
 ) :
     TypedPreferences<Float>(
-        mutableMapOf(*preferenceDefault),
-        sharedPreferences
+        *preferenceDefault,
+        sharedPreferences = sharedPreferences
     ) {
 
     override fun SharedPreferences.writeValue(key: String, value: Float, synchronously: Boolean) {

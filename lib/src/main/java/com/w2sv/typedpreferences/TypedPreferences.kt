@@ -9,9 +9,9 @@ import slimber.log.i
  * Base for map delegator objects interfacing with [SharedPreferences]
  */
 abstract class TypedPreferences<T>(
-    protected val defaults: MutableMap<String, T>,
+    vararg preferenceDefault: Pair<String, T>,
     private val sharedPreferences: SharedPreferences
-) : MutableMap<String, T> by defaults,
+) : MutableMap<String, T> by mutableMapOf(*preferenceDefault),
     DefaultLifecycleObserver {
 
     /**

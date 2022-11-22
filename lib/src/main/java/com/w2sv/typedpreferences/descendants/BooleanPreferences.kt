@@ -11,8 +11,8 @@ abstract class BooleanPreferences(
     sharedPreferences: SharedPreferences
 ) :
     TypedPreferences<Boolean>(
-        mutableMapOf(*preferenceDefault),
-        sharedPreferences
+        *preferenceDefault,
+        sharedPreferences = sharedPreferences
     ) {
 
     override fun SharedPreferences.writeValue(key: String, value: Boolean, synchronously: Boolean) {

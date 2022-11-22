@@ -12,8 +12,8 @@ abstract class UriPreferences<T : Uri?>(
     sharedPreferences: SharedPreferences
 ) :
     TypedPreferences<T>(
-        mutableMapOf(*preferenceDefault),
-        sharedPreferences
+        *preferenceDefault,
+        sharedPreferences = sharedPreferences
     ) {
 
     override fun SharedPreferences.writeValue(key: String, value: T, synchronously: Boolean) {

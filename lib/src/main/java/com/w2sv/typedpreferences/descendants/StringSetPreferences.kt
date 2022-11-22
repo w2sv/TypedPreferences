@@ -11,8 +11,8 @@ abstract class StringSetPreferences(
     sharedPreferences: SharedPreferences
 ) :
     TypedPreferences<Set<String>?>(
-        mutableMapOf(*preferenceDefault),
-        sharedPreferences
+        *preferenceDefault,
+        sharedPreferences = sharedPreferences
     ) {
 
     override fun SharedPreferences.writeValue(
