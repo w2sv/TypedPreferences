@@ -13,7 +13,7 @@ implementation 'com.github.w2sv:typedpreferences:x.y.z'
 ```
 or get the latest snapshot of a certain branch:
 ```gradle
-implementation 'com.github.w2sv:typedpreferences:<BRANCH_NAME>-SNAPSHOT'
+implementation 'com.github.w2sv:typedpreferences:<BRANCH-NAME>-SNAPSHOT'
 ```
 
 ## License
