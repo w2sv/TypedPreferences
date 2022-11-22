@@ -18,4 +18,4 @@ implementation 'com.github.w2sv:typedpreferences:<BRANCH_NAME>-SNAPSHOT'
 
 ## License
 
-[GPL-3.0](https://github.com/w2sv/TypedPreferences/blob/master/LICENSE)
+[GPL-3.0](https://github.com/w2sv/TypedPreferences/blob/main/LICENSE)
