@@ -4,8 +4,7 @@
 [![](https://jitpack.io/v/w2sv/TypedPreferences.svg)](https://jitpack.io/#w2sv/TypedPreferences)
 ![GitHub](https://img.shields.io/github/license/w2sv/TypedPreferences)
 
-Android library for convenient interfacing with SharedPreferences whilst reducing the number of carried out, expensive IO operations 
-
+Android library for convenient interfacing with SharedPreferences whilst reducing the number of carried out IO operations
 ## Installation with gradle & jitpack
 
 ```gradle
