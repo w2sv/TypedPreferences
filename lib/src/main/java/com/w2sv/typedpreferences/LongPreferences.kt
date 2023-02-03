@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package com.w2sv.typedpreferences.descendants
+package com.w2sv.typedpreferences
 
 import android.content.SharedPreferences
 import androidx.core.content.edit

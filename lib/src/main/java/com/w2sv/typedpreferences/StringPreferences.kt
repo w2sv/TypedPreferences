@@ -1,10 +1,9 @@
 @file:Suppress("unused")
 
-package com.w2sv.typedpreferences.descendants
+package com.w2sv.typedpreferences
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.w2sv.typedpreferences.TypedPreferences
 
 abstract class StringPreferences<T : String?>(
     vararg preferenceDefault: Pair<String, T>,
